@@ -1,7 +1,11 @@
 package com.example.studyplant;
 
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,9 +18,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    int level = 1, i, sum = 0,total=0;
+    int level = 1, i, sum = 0, total = 0;
     LinearLayout linear_timetable;
-    TextView txt_level,txt_total,txt_current;
+    TextView txt_level, txt_total, txt_current;
     Button btn_study, btn_input;
     ImageView image;
     boolean clicked = false;
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sf = getSharedPreferences("sFile", MODE_PRIVATE);
+        int time = sf.getInt("time", 0);
 
         btn_study = findViewById(R.id.btn_study);
         txt_level = findViewById(R.id.txt_level);
@@ -52,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         image = findViewById(R.id.image);
 
         linear_timetable.setVisibility(View.INVISIBLE);
+        reSetting(time);
 
         btn_study.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,59 +77,126 @@ public class MainActivity extends AppCompatActivity {
         btn_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sum = sum + Integer.parseInt(edt_inputTime.getText().toString());
-                total = total + Integer.parseInt(edt_inputTime.getText().toString());
-
-                txt_total.setText(Integer.toString(total));
-
-                if (sum >= 12) {
-                    level += (sum/12);
-                    sum %= 12;
-                    txt_level.setText("Level "+level);
-                    for (i = 1; i <= 12; i++) {
-                        timeArr[i - 1].setBackgroundResource(R.drawable.off);
+                String time = edt_inputTime.getText().toString();
+                int time_num = Integer.parseInt(edt_inputTime.getText().toString());
+                if(!time.isEmpty()){
+                    if(time_num > 8) {
+                        showAlertDialog();
                     }
-                    for (i = 1; i <= sum; i++) {
-                        timeArr[i - 1].setBackgroundResource(R.drawable.on);
-                    }
+                    else {
+                        sum = sum + Integer.parseInt(edt_inputTime.getText().toString());
+                        total = total + Integer.parseInt(edt_inputTime.getText().toString());
 
-                }else{
-                    for (i = 1; i <= sum; i++) {
-                        timeArr[i - 1].setBackgroundResource(R.drawable.on);
+                        txt_total.setText(Integer.toString(total)+"시간");
+
+                        if (sum >= 12) {
+                            level += (sum/12);
+                            sum %= 12;
+                            txt_level.setText("Level "+level);
+                            for (i = 1; i <= 12; i++) {
+                                timeArr[i - 1].setBackgroundResource(R.drawable.off);
+                            }
+                            for (i = 1; i <= sum; i++) {
+                                timeArr[i - 1].setBackgroundResource(R.drawable.on);
+                            }
+
+                        }else{
+                            for (i = 1; i <= sum; i++) {
+                                timeArr[i - 1].setBackgroundResource(R.drawable.on);
+                            }
+                        }
+                        edt_inputTime.setText("");
+                        txt_current.setText(Integer.toString(sum)+"/12");
+                        setImage();
                     }
                 }
-                edt_inputTime.setText("");
-                txt_current.setText(Integer.toString(sum)+"/12,");
-                setImage();
-
             }
         });
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("sFile",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("time", total);
+        editor.commit();
+
+    }
+
     private void setImage() {
         switch (level) {
             case 1 :
-                image.setImageResource(R.drawable.icon_1);
+                image.setImageResource(R.drawable.image_1);
                 break;
 
             case 2 :
-                image.setImageResource(R.drawable.icon_2);
+                image.setImageResource(R.drawable.image_2);
                 break;
 
             case 3 :
-                image.setImageResource(R.drawable.icon_3);
+                image.setImageResource(R.drawable.image_3);
                 break;
 
             case 4 :
-                image.setImageResource(R.drawable.icon_4);
+                image.setImageResource(R.drawable.image_4);
                 break;
 
             case 5 :
-                image.setImageResource(R.drawable.icon_5);
+                image.setImageResource(R.drawable.image_5);
                 break;
 
             case 6 :
-                image.setImageResource(R.drawable.icon_6);
+                image.setImageResource(R.drawable.image_6);
+                break;
+
+            default:
+                image.setImageResource(R.drawable.image_6);
                 break;
         }
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        alertDialogBuilder
+                .setTitle("경고!!")
+                .setMessage("산꼴나셨네요~ 어떻게 하루에 8시간 넘게함?")
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void reSetting(int time) {
+        sum = sum + time;
+        total = total + time;
+
+        txt_total.setText(Integer.toString(total)+"시간");
+
+        if (sum >= 12) {
+            level += (sum/12);
+            sum %= 12;
+            txt_level.setText("Level "+level);
+            for (i = 1; i <= 12; i++) {
+                timeArr[i - 1].setBackgroundResource(R.drawable.off);
+            }
+            for (i = 1; i <= sum; i++) {
+                timeArr[i - 1].setBackgroundResource(R.drawable.on);
+            }
+
+        }else{
+            for (i = 1; i <= sum; i++) {
+                timeArr[i - 1].setBackgroundResource(R.drawable.on);
+            }
+        }
+        edt_inputTime.setText("");
+        txt_current.setText(Integer.toString(sum)+"/12");
+        setImage();
     }
 }

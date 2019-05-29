@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="7">
+        android:layout_weight="5">
 
         <Button
             android:id="@+id/btn_study"
@@ -35,36 +36,52 @@
 
 
     <LinearLayout
-        android:id="@+id/linear_timetable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edt_timeInput"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="30dp"
-            android:hint="시간"
-            android:inputType="number" />
-
-        <Button
-            android:id="@+id/btn_input"
+        <LinearLayout
+            android:id="@+id/linear_timetable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="입력"
-            android:textSize="30dp" />
+            android:layout_weight="3"
+            android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/edt_timeInput"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
+                android:hint="시간"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btn_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="입력"
+                android:textSize="30dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txt_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="117dp"
+            android:text="0시간"
+            android:textColor="#000000"
+            android:textSize="50dp" />
 
     </LinearLayout>
     <ImageView
-        android:layout_width="200dp"
+        android:layout_width="500dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_1"
-        android:layout_weight="20"
+        android:src="@drawable/image_1"
+        android:layout_weight="5"
         android:layout_gravity="center"
         android:id="@+id/image"/>
     <LinearLayout
@@ -78,17 +95,11 @@
             android:layout_height="wrap_content"
             android:text="0/12 "
             android:textSize="50dp"
+            android:layout_marginRight="13dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
 
             android:id="@+id/txt_current"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt_total"
-            android:text="0"
-            android:textSize="50dp"
-
-            />
-
 
     </LinearLayout>
 
