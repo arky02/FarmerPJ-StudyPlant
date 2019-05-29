@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout linear_timetable;
     TextView txt_level,txt_total,txt_current;
     Button btn_study, btn_input;
+    ImageView image;
     boolean clicked = false;
 
     EditText edt_inputTime;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         timeArr[9] = findViewById(R.id.time10);
         timeArr[10] = findViewById(R.id.time11);
         timeArr[11] = findViewById(R.id.time12);
+        image = findViewById(R.id.image);
 
         linear_timetable.setVisibility(View.INVISIBLE);
 
@@ -63,10 +65,6 @@ public class MainActivity extends AppCompatActivity {
                     clicked = true;
                     linear_timetable.setVisibility(View.INVISIBLE);
                 }
-
-
-
-
             }
         });
         btn_input.setOnClickListener(new View.OnClickListener() {
@@ -95,12 +93,36 @@ public class MainActivity extends AppCompatActivity {
                 }
                 edt_inputTime.setText("");
                 txt_current.setText(Integer.toString(sum)+"/12,");
+                setImage();
 
             }
-
-
-
-
         });
+    }
+    private void setImage() {
+        switch (level) {
+            case 1 :
+                image.setImageResource(R.drawable.icon_1);
+                break;
+
+            case 2 :
+                image.setImageResource(R.drawable.icon_2);
+                break;
+
+            case 3 :
+                image.setImageResource(R.drawable.icon_3);
+                break;
+
+            case 4 :
+                image.setImageResource(R.drawable.icon_4);
+                break;
+
+            case 5 :
+                image.setImageResource(R.drawable.icon_5);
+                break;
+
+            case 6 :
+                image.setImageResource(R.drawable.icon_6);
+                break;
+        }
     }
 }
