@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sf = getSharedPreferences("sFile", MODE_PRIVATE);
         int time = sf.getInt("time", 0);
+        int time_current = sf.getInt("time_current",0);
 
         btn_study = findViewById(R.id.btn_study);
         txt_level = findViewById(R.id.txt_level);
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         image = findViewById(R.id.image);
 
         linear_timetable.setVisibility(View.INVISIBLE);
+        studyTimeData studytime = (studyTimeData)getApplication();
+        studytime.setTime(time_current);
         reSetting(time);
 
         btn_study.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +82,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String time = edt_inputTime.getText().toString();
                 int time_num = Integer.parseInt(edt_inputTime.getText().toString());
+                studyTimeData studytime = (studyTimeData)getApplication();
+                studytime.setTime(Integer.parseInt(time));
                 if(!time.isEmpty()){
-                    if(time_num > 8) {
+                    if(time_num > 8 || studytime.getTime() > 8) {
                         showAlertDialog();
+                        studytime.backTime(Integer.parseInt(time));
                     }
                     else {
                         sum = sum + Integer.parseInt(edt_inputTime.getText().toString());
@@ -118,9 +124,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
 
+        studyTimeData studytime = (studyTimeData)getApplication();
+        int time = studytime.getTime();
         SharedPreferences sharedPreferences = getSharedPreferences("sFile",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("time", total);
+        editor.putInt("time_current", time);
         editor.commit();
 
     }
