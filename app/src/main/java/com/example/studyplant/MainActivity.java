@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     int level = 1, i, sum = 0, total = 0;
     LinearLayout linear_timetable;
     TextView txt_level, txt_total, txt_current;
-    Button btn_study, btn_input;
+    Button btn_study, btn_input,btn_minus;
     ImageView image;
     boolean clicked = false;
 
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btn_input = findViewById(R.id.btn_input);
         txt_current = findViewById(R.id.txt_current);
         txt_total = findViewById(R.id.txt_total);
+        btn_minus = findViewById(R.id.btn_minus);
         timeArr[0] = findViewById(R.id.time1);
         timeArr[1] = findViewById(R.id.time2);
         timeArr[2] = findViewById(R.id.time3);
@@ -110,6 +111,13 @@ public class MainActivity extends AppCompatActivity {
                         setImage();
                     }
                 }
+            }
+        });
+
+        btn_minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

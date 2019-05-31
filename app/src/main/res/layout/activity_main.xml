@@ -13,14 +13,33 @@
         android:layout_height="0dp"
         android:layout_weight="5">
 
-        <Button
-            android:id="@+id/btn_study"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="30dp"
-            android:text="면학시간 버튼"
-            android:textSize="20dp" />
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_study"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
+                android:text="면학시간 추가"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/btn_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
+                android:text="면학시간 수정"
+                android:textSize="20dp" />
+
+
+
+        </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/txt_level"
