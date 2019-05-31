@@ -1,4 +1,5 @@
 package com.example.studyplant;
+//TODO 되는지 탭 연결해서 체크, 시간 줄이기 기능& 알림(시간 줄일때, 비번 설정할떄 잃어버리면 우리한테 물어봐라!)> 서버에 이름, 비번, 번호, 시간까지 올리기
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_study, btn_input,btn_minus;
     ImageView image;
     boolean clicked = false;
-    SharedPreferences shared;
+    SharedPreferences shared,sf;
 
     EditText edt_inputTime;
     ImageView[] timeArr = new ImageView[12];
@@ -43,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Global.s8_num = shared.getInt("num",-1); //여기서 최초 로그인할때 입력한 번호 sharedpreference에 저장한거 가져온거를 Global.s8_num에 넣음
         //근데 GLobal보면 내가 이걸 번호별로 인덱스 해서 이름배열 정리했단 말야 그래서 애들 이름은  Global.student[Global.s8_num-1] 이거야
         Toast.makeText(getApplicationContext(),Global.student[Global.s8_num-1]+"농부님 환영합니다",Toast.LENGTH_SHORT).show();
-
-        SharedPreferences sf = getSharedPreferences("sFile", MODE_PRIVATE);
+        sf = getSharedPreferences("sFile", MODE_PRIVATE);
 
         int time = sf.getInt("time", 0);
         int time_current = sf.getInt("time_current",0);
@@ -159,33 +159,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void setImage() {
         switch (level) {
-            case 1 :
-                image.setImageResource(R.drawable.image_1);
-                break;
-
-            case 2 :
-                image.setImageResource(R.drawable.image_2);
-                break;
-
-            case 3 :
-                image.setImageResource(R.drawable.image_3);
-                break;
-
-            case 4 :
-                image.setImageResource(R.drawable.image_4);
-                break;
-
-            case 5 :
-                image.setImageResource(R.drawable.image_5);
-                break;
-
-            case 6 :
-                image.setImageResource(R.drawable.image_6);
-                break;
-
-            default:
-                image.setImageResource(R.drawable.image_6);
-                break;
+            case 1 : image.setImageResource(R.drawable.image_1); break;
+            case 2 : image.setImageResource(R.drawable.image_2); break;
+            case 3 : image.setImageResource(R.drawable.image_3); break;
+            case 4 : image.setImageResource(R.drawable.image_4); break;
+            case 5 : image.setImageResource(R.drawable.image_5); break;
+            case 6 : image.setImageResource(R.drawable.image_6); break;
+            default: image.setImageResource(R.drawable.image_6); break;
         }
     }
 

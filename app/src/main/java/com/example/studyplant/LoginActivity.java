@@ -26,8 +26,10 @@ public class LoginActivity extends AppCompatActivity {
         shared = getApplicationContext().getSharedPreferences("s8_num",MODE_PRIVATE);
 
         if(shared.contains("num")){
-            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(),password.class);
             startActivity(intent);
+            intent.putExtra("isFirst",false);
+
         }
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -38,8 +40,9 @@ public class LoginActivity extends AppCompatActivity {
                     edit = shared.edit();
                     edit.putInt("num",Global.s8_num);
                     edit.commit();
-                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(),password.class);
                     startActivity(intent);
+                    intent.putExtra("isFirst",true);
                 }
             }
         });

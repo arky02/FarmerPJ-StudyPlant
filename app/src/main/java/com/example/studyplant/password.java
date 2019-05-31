@@ -1,22 +1,28 @@
 package com.example.studyplant;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class password extends AppCompatActivity {
 
     //Button[] btn = new Button[9];
-    Button btn_clear,btn_erase;
+    Button btn_clear,btn_erase,btn_login;
     EditText edt_result;
+    TextView txt_password;
+    SharedPreferences sp_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
+
 
         /*
         btn[0] = findViewById(R.id.btn_0);
@@ -29,9 +35,45 @@ public class password extends AppCompatActivity {
         btn[7] = findViewById(R.id.btn_7);
         btn[8] = findViewById(R.id.btn_8);
         btn[9] = findViewById(R.id.btn_9); */
+
+        txt_password = findViewById(R.id.txt_password);
         btn_clear = findViewById(R.id.btn_clear);
         btn_erase =findViewById(R.id.btn_back);
         edt_result = findViewById(R.id.edt_result);
+        btn_login = findViewById(R.id.btn_login2);
+
+        Intent intent1 = getIntent();
+        final Boolean isFirst = intent1.getExtras().getBoolean("isFirst");
+        sp_password = getApplicationContext().getSharedPreferences("password", MODE_PRIVATE);
+
+        if(isFirst){
+            txt_password.setText("비밀번호를 설정하세요");
+            btn_login.setText("설정");
+        }
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(edt_result.getText().toString().length()>=4) {
+                    if (isFirst) {
+                        SharedPreferences.Editor edit = sp_password.edit();
+                        edit.putString("password", edt_result.getText().toString());
+                        edit.commit();
+                        Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent1);
+                    }else{
+                        if(edt_result.getText().toString().equals(sp_password.getString("password",null))){
+                            Intent intent1 = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent1);
+                        }else{
+                            Toast.makeText(getApplicationContext(),"비밀번호가 틀립니다. 다시 입력해주세요",Toast.LENGTH_SHORT).show();
+                            edt_result.setText("");
+                        }
+                    }
+                }
+            }
+        });
+
 
     }
     public void onClick (View v)
@@ -49,4 +91,5 @@ public class password extends AppCompatActivity {
             case R.id.btn_9 : edt_result.setText(edt_result.getText().toString() + 9); break;
         }
     }
+
 }
