@@ -2,6 +2,7 @@ package com.example.studyplant;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.IBinder;
 
 import java.util.Calendar;
@@ -34,8 +35,10 @@ public class MyService extends Service {
                     mday += 240000;
 
                     if(mday >= DAY_MILLIS) {
-                        studyTimeData studytime = (studyTimeData)getApplicationContext();
-                        studytime.resetTime();
+                        SharedPreferences sf = getSharedPreferences("sFile",MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sf.edit();
+                        editor.putInt("time_current", 0);
+                        editor.commit();
                     }
                 }
             }

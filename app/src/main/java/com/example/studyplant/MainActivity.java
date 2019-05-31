@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.sql.Array;
 import java.util.ArrayList;
 
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
     EditText edt_inputTime;
     ImageView[] timeArr = new ImageView[12];
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -207,5 +212,9 @@ public class MainActivity extends AppCompatActivity {
         edt_inputTime.setText("");
         txt_current.setText(Integer.toString(sum)+"/12");
         setImage();
+    }
+
+    private void addData(String userName, int time) {
+        databaseReference.child(userName).push().setValue(time);
     }
 }
