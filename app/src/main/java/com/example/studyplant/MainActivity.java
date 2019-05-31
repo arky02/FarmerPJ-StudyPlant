@@ -12,10 +12,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.sql.Array;
 import java.util.ArrayList;
 
@@ -23,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
     int level = 1, i, sum = 0, total = 0;
     LinearLayout linear_timetable;
-    TextView txt_level, txt_total, txt_current;
+    TextView txt_level, txt_total, txt_current,txt_name;
     Button btn_study, btn_input,btn_minus;
     ImageView image;
     boolean clicked = false;
+    SharedPreferences shared;
 
     EditText edt_inputTime;
     ImageView[] timeArr = new ImageView[12];
@@ -38,11 +39,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        shared = getApplicationContext().getSharedPreferences("num",0);
+        Global.s8_num = shared.getInt("num",-1);
+        Toast.makeText(getApplicationContext(),Global.student[Global.s8_num-1]+"농부님 환영합니다",Toast.LENGTH_SHORT).show();
+
         SharedPreferences sf = getSharedPreferences("sFile", MODE_PRIVATE);
+
         int time = sf.getInt("time", 0);
         int time_current = sf.getInt("time_current",0);
 
         btn_study = findViewById(R.id.btn_study);
+        txt_name =findViewById(R.id.farmer_name);
         txt_level = findViewById(R.id.txt_level);
         linear_timetable = findViewById(R.id.linear_timetable);
         edt_inputTime = findViewById(R.id.edt_timeInput);
@@ -63,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
         timeArr[10] = findViewById(R.id.time11);
         timeArr[11] = findViewById(R.id.time12);
         image = findViewById(R.id.image);
+
+        txt_name.setText("StudyPlant의 부지런한 농부"+Global.student[Global.s8_num-1]);
 
         linear_timetable.setVisibility(View.INVISIBLE);
         studyTimeData studytime = (studyTimeData)getApplication();

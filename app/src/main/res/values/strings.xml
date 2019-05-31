@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">StudyPlant</string>
+    <string name="plantbtn">Studyplant의 농부가 되어주세요!</string>
+    <string name="app_name">Studyplant</string>
+
 </resources>
