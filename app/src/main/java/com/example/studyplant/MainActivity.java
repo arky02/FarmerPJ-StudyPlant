@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     Button btn_study, btn_input,btn_minus;
     ImageView image;
     boolean clicked = false;
-    SharedPreferences shared,sf;
+    SharedPreferences shared,sf,sp_password;
 
     EditText edt_inputTime;
     ImageView[] timeArr = new ImageView[12];
@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         Global.s8_num = shared.getInt("num",-1); //여기서 최초 로그인할때 입력한 번호 sharedpreference에 저장한거 가져온거를 Global.s8_num에 넣음
         //근데 GLobal보면 내가 이걸 번호별로 인덱스 해서 이름배열 정리했단 말야 그래서 애들 이름은  Global.student[Global.s8_num-1] 이거야
         Toast.makeText(getApplicationContext(),Global.student[Global.s8_num-1]+"농부님 환영합니다",Toast.LENGTH_SHORT).show();
-        sf = getSharedPreferences("sFile", MODE_PRIVATE);
+        sp_password = getApplicationContext().getSharedPreferences("password", MODE_PRIVATE); //비밀번호 가져오기
+        sf = getSharedPreferences("sFile", MODE_PRIVATE);//시간 가져오기
 
         int time = sf.getInt("time", 0);
         int time_current = sf.getInt("time_current",0);
