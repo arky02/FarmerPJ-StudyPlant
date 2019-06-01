@@ -153,12 +153,15 @@ public class MainActivity extends AppCompatActivity {
         studyTimeData studytime = (studyTimeData)getApplication();
         int time = studytime.getTime();
         SharedPreferences sharedPreferences = getSharedPreferences("sFile",MODE_PRIVATE);
+        sp_password = getApplicationContext().getSharedPreferences("password", MODE_PRIVATE); //비밀번호 가져오기
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("time", total);
         editor.putInt("time_current", time);
         editor.commit();
 
-        //addData(Global.student[Global.s8_num-1], total, Global.s8_num, ); //비밀번호 추가
+        String pw = sp_password.getString("password","");
+
+        addData(Global.student[Global.s8_num-1], total, Global.s8_num, pw); //비밀번호 추가
 
     }
 
@@ -218,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void addData(String userName, int time, int userNumber, int pw) {
+    private void addData(String userName, int time, int userNumber, String pw) {
         Map<String,Object>taskmap = new HashMap<>();
         taskmap.put(userNumber + "/" + "Name" , userName);
         taskmap.put(userNumber + "/" + "Password" , pw);
