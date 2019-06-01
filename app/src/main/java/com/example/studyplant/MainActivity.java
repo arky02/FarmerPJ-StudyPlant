@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -155,6 +157,8 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("time_current", time);
         editor.commit();
 
+        //addData(Global.student[Global.s8_num-1], total, Global.s8_num, ); //비밀번호 추가
+
     }
 
     private void setImage() {
@@ -212,7 +216,14 @@ public class MainActivity extends AppCompatActivity {
         setImage();
     }
 
-    private void addData(String userName, int time) {
-        databaseReference.child(userName).push().setValue(time);
+
+    private void addData(String userName, int time, int userNumber, int pw) {
+        Map<String,Object>taskmap = new HashMap<>();
+        taskmap.put(userNumber + "/" + "Name" , userName);
+        taskmap.put(userNumber + "/" + "Password" , pw);
+        taskmap.put(userNumber + "/" + "Time" , time);
+
+        databaseReference.updateChildren(taskmap);
+
     }
 }
