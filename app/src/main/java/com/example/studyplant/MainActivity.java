@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -213,10 +215,15 @@ public class MainActivity extends AppCompatActivity {
         studyTimeData studytime = (studyTimeData)getApplication();
         int time = studytime.getTime();
         SharedPreferences sharedPreferences = getSharedPreferences("sFile",MODE_PRIVATE);
+        sp_password = getApplicationContext().getSharedPreferences("password", MODE_PRIVATE); //비밀번호 가져오기
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("time", total);
         editor.putInt("time_current", time);
         editor.commit();
+
+        String pw = sp_password.getString("password","");
+
+        addData(Global.student[Global.s8_num-1], total, Global.s8_num, pw); //비밀번호 추가
 
     }
 
@@ -275,7 +282,14 @@ public class MainActivity extends AppCompatActivity {
         setImage();
     }
 
-    private void addData(String userName, int time) {
-        databaseReference.child(userName).push().setValue(time);
+
+    private void addData(String userName, int time, int userNumber, String pw) {
+        Map<String,Object>taskmap = new HashMap<>();
+        taskmap.put(userNumber + "/" + "Name" , userName);
+        taskmap.put(userNumber + "/" + "Password" , pw);
+        taskmap.put(userNumber + "/" + "Time" , time);
+
+        databaseReference.updateChildren(taskmap);
+
     }
 }
