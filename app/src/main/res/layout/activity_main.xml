@@ -45,18 +45,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/btn_design"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
                 android:text="면학시간 추가"
-                android:textSize="20dp" />
+                android:textSize="18dp"
+                android:textColor="#707070"/>
 
             <Button
                 android:id="@+id/btn_minus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
                 android:text="면학시간 수정"
-                android:textSize="20dp" />
+                android:textSize="18dp"
+                android:paddingRight="13dp"
+                android:paddingLeft="13dp"
+                android:background="@drawable/btn_design"
+                android:textColor="#707070"/>
+
 
 
         </LinearLayout>
@@ -76,20 +85,32 @@
 
             <EditText
                 android:id="@+id/edt_timeInput"
-                android:layout_width="200dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="30dp"
-                android:hint="시간"
-                android:inputType="number" />
+                android:layout_marginTop="20dp"
+                android:hint="시간 입력"
+                android:inputType="number"
+                android:textColorHint="#7EAC80"
+                android:textColor="#7EAC80"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간"
+                android:textSize="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/colorPrimaryDark"/>
 
             <Button
                 android:id="@+id/btn_input"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="입력"
-                android:textSize="30dp" />
+                android:layout_marginTop="20dp"
+                android:text="추가"
+                android:textSize="20dp"
+                android:background="@drawable/btn_add"
+                android:textColor="#454745"/>
 
         </LinearLayout>
 
@@ -98,10 +119,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="117dp"
-            android:text="0시간"
-            android:textColor="#000000"
-            android:textSize="50dp" />
+            android:layout_marginLeft="60dp"
+            android:text="&quot;총 0시간&quot;"
+            android:textColor="#66A068"
+            android:textSize="40dp"
+            android:textStyle="italic"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
     <ImageView
@@ -120,12 +143,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0/12 "
-            android:textSize="50dp"
+            android:text="0/12 시간 "
+            android:textSize="40dp"
             android:layout_marginRight="13dp"
             android:textStyle="bold"
-            android:textColor="#000000"
-
+            android:textColor="#1565C0"
             android:id="@+id/txt_current"/>
 
     </LinearLayout>

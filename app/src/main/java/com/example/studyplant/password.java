@@ -1,7 +1,10 @@
 package com.example.studyplant;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,14 +18,13 @@ public class password extends AppCompatActivity {
     //Button[] btn = new Button[9];
     Button btn_clear,btn_erase,btn_login;
     EditText edt_result;
-    TextView txt_password;
+    TextView txt_password,txt_forget;
     SharedPreferences sp_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
-
 
         /*
         btn[0] = findViewById(R.id.btn_0);
@@ -41,6 +43,7 @@ public class password extends AppCompatActivity {
         btn_erase =findViewById(R.id.btn_back);
         edt_result = findViewById(R.id.edt_result);
         btn_login = findViewById(R.id.btn_login2);
+        txt_forget = findViewById(R.id.txt_forget);
 
         Intent intent1 = getIntent();
         final Boolean isFirst = intent1.getExtras().getBoolean("isFirst");
@@ -75,6 +78,8 @@ public class password extends AppCompatActivity {
         });
 
 
+
+
     }
     public void onClick (View v)
     {
@@ -91,5 +96,33 @@ public class password extends AppCompatActivity {
             case R.id.btn_9 : edt_result.setText(edt_result.getText().toString() + 9); break;
         }
     }
+    public void Click(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+
+        builder.setMessage("개발진한테 문의(페메)하세요! 비밀번호를 알려드립니다 ^_^");
+        builder.setCancelable(false);
+        builder.setTitle("아이고...설마, 비밀번호를 잊어버렸나요");
+        builder.setPositiveButton("네! 물어볼께요ㅜㅜ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(),
+                        "잘 생각해봐요.. 기억이 날수도?",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("핑요없어!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Do something when click the negative button
+                Toast.makeText(getApplicationContext(),
+                        "장난으로 눌러보다니!! 이런..",Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
 }
+
+
