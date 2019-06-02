@@ -17,8 +17,8 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="261dp"
-            android:layout_height="251dp"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
             android:layout_marginBottom="30dp"
             android:src="@drawable/plant" />
 
@@ -28,14 +28,14 @@
             android:layout_marginBottom="10dp"
             android:text=" &quot; StudyPlant &quot;"
             android:textColor="#FFFFFF"
-            android:textSize="60dp" />
+            android:textSize="50dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="부지런한 공부습관 기르기"
             android:textColor="#FFFFFF"
-            android:textSize="20dp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout

@@ -12,9 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="S8's StudyPlant LoginPage"
-        android:textSize="60sp"
+        android:textSize="50sp"
         android:layout_margin="45dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,7 +74,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:text="@string/plantbtn"
-            android:textSize="25dp" />
+            android:textSize="25dp"
+            android:background="@drawable/btn_design"
+            android:padding="15dp"/>
 
 
     </LinearLayout>

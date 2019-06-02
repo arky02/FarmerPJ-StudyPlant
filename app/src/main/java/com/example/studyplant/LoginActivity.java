@@ -27,8 +27,9 @@ public class LoginActivity extends AppCompatActivity {
 
         if(shared.contains("num")){
             Intent intent = new Intent(getApplicationContext(),password.class);
-            startActivity(intent);
             intent.putExtra("isFirst",false);
+            startActivity(intent);
+
 
         }
 
@@ -41,8 +42,9 @@ public class LoginActivity extends AppCompatActivity {
                     edit.putInt("num",Global.s8_num);
                     edit.commit();
                     Intent intent = new Intent(getApplicationContext(),password.class);
-                    startActivity(intent);
                     intent.putExtra("isFirst",true);
+                    startActivity(intent);
+
                 }
             }
         });

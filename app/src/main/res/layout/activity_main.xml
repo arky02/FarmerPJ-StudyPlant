@@ -147,8 +147,9 @@
             android:textSize="40dp"
             android:layout_marginRight="13dp"
             android:textStyle="bold"
-            android:textColor="#1565C0"
-            android:id="@+id/txt_current"/>
+            android:textColor="#0D47A1"
+            android:id="@+id/txt_current"
+            android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 

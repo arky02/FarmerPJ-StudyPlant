@@ -77,8 +77,35 @@ public class password extends AppCompatActivity {
             }
         });
 
+        txt_forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
 
+                builder.setMessage("개발진한테 문의(페메)하세요! 비밀번호를 알려드립니다 ^_^");
+                builder.setCancelable(false);
+                builder.setTitle("아이고...설마, 비밀번호를 잊어버렸나요");
+                builder.setPositiveButton("네! 물어볼께요ㅜㅜ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),
+                                "잘 생각해봐요.. 기억이 날수도?",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                builder.setNegativeButton("핑요없어!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do something when click the negative button
+                        Toast.makeText(getApplicationContext(),
+                                "장난으로 눌러보다니!! 이런..",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
 
     }
     public void onClick (View v)
@@ -96,33 +123,6 @@ public class password extends AppCompatActivity {
             case R.id.btn_9 : edt_result.setText(edt_result.getText().toString() + 9); break;
         }
     }
-    public void Click(View v){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-
-        builder.setMessage("개발진한테 문의(페메)하세요! 비밀번호를 알려드립니다 ^_^");
-        builder.setCancelable(false);
-        builder.setTitle("아이고...설마, 비밀번호를 잊어버렸나요");
-        builder.setPositiveButton("네! 물어볼께요ㅜㅜ", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(),
-                        "잘 생각해봐요.. 기억이 날수도?",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        builder.setNegativeButton("핑요없어!", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Do something when click the negative button
-                Toast.makeText(getApplicationContext(),
-                        "장난으로 눌러보다니!! 이런..",Toast.LENGTH_SHORT).show();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-
 }
 
 
