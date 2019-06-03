@@ -10,9 +10,10 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="4"
-        android:orientation="horizontal">
+        android:layout_height="31dp"
+        android:layout_weight="3"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/farmer_name"
@@ -20,69 +21,68 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
+            android:layout_weight="8"
             android:text="농부 이름"
             android:textSize="30dp"
-            android:layout_weight="8"/>
+            android:textColor="#393A39"/>
 
         <TextView
             android:id="@+id/txt_level"
-            android:layout_width="133dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
+            android:layout_weight="2"
+            android:gravity="right"
             android:text="LEVEL1"
             android:textSize="30dp"
-            android:gravity="right"
-            android:layout_weight="2"/>
+            android:textColor="#8BC34A"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_study"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginLeft="45dp"
+            android:background="@drawable/btn_design"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            android:text="면학시간 추가"
+            android:textColor="#707070"
+            android:textSize="18dp" />
 
-            <Button
-                android:id="@+id/btn_study"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/btn_design"
-                android:paddingLeft="13dp"
-                android:paddingRight="13dp"
-                android:text="면학시간 추가"
-                android:textSize="18dp"
-                android:textColor="#707070"/>
+        <Button
+            android:id="@+id/btn_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/btn_design"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            android:text="면학시간 수정"
+            android:textColor="#707070"
+            android:textSize="18dp" />
 
-            <Button
-                android:id="@+id/btn_minus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginBottom="20dp"
-                android:text="면학시간 수정"
-                android:textSize="18dp"
-                android:paddingRight="13dp"
-                android:paddingLeft="13dp"
-                android:background="@drawable/btn_design"
-                android:textColor="#707070"/>
-
-            <TextView
-                android:id="@+id/txt_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="60dp"
-                android:layout_marginBottom="20dp"
-                android:text="&quot;총 0시간&quot;"
-                android:textColor="#66A068"
-                android:textSize="40dp"
-                android:textStyle="italic" />
+        <TextView
+            android:id="@+id/txt_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="100dp"
+            android:text="&quot;총 0시간&quot;"
+            android:textColor="#66A068"
+            android:textSize="40dp"
+            android:textStyle="italic" />
 
 
-
-        </LinearLayout>
+    </LinearLayout>
 
 
     <LinearLayout
@@ -149,7 +149,7 @@
             android:textSize="40dp"
             android:layout_marginRight="13dp"
             android:textStyle="bold"
-            android:textColor="#0D47A1"
+            android:textColor="#03A9F4"
             android:id="@+id/txt_current"
             android:layout_marginBottom="20dp"/>
 

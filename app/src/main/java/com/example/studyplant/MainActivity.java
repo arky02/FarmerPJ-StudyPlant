@@ -75,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
         timeArr[11] = findViewById(R.id.time12);
         image = findViewById(R.id.image);
 
-        txt_name.setText("StudyPlant의 부지런한 농부"+Global.student[Global.s8_num-1]);
+        txt_name.setText("StudyPlant의 부지런한 "+ Global.student[Global.s8_num-1]+"농부");
+
 
         linear_timetable.setVisibility(View.INVISIBLE);
         studyTimeData studytime = (studyTimeData)getApplication();
@@ -88,23 +89,14 @@ public class MainActivity extends AppCompatActivity {
                 a=1;//면학시간 추가
 
                 if(clicked){
-
-                    btn_study.setBackgroundResource(R.drawable.btn_design);
-                    btn_minus.setBackgroundResource(R.drawable.btn_design);
-                    btn_study.setTextColor(Color.rgb(112, 112, 112));
-                    btn_minus.setTextColor(Color.rgb(112, 112, 112));
                     linear_timetable.setVisibility(View.VISIBLE);
                     clicked = false;
 
                 }else{
-
-                    btn_study.setBackgroundResource(R.drawable.btn_click1);
-                    btn_minus.setBackgroundResource(R.drawable.btn_design);
-                    btn_study.setTextColor(Color.rgb(255, 255, 255));
-                    btn_minus.setTextColor(Color.rgb(112, 112, 112));
                     linear_timetable.setVisibility(View.INVISIBLE);
                     clicked = true;
                 }
+                btn_input.setText("추가");
 
             }
 
@@ -115,18 +107,25 @@ public class MainActivity extends AppCompatActivity {
                 String time = edt_inputTime.getText().toString();
                 int time_num = Integer.parseInt(edt_inputTime.getText().toString());
                 studyTimeData studytime = (studyTimeData)getApplication();
-                studytime.setTime(Integer.parseInt(time));
+
+                if(a==1){
+                    studytime.setTime(Integer.parseInt(time));
+                }else if(a==2){
+                    studytime.backTime(Integer.parseInt(time));
+                    reSetting(sum);
+                }
+
                 if(!time.isEmpty()){
                     if(time_num > 8 || studytime.getTime() > 8) {
-                        showAlertDialog();
-                        studytime.backTime(Integer.parseInt(time));
-                    }
-                    else {
+                       showAlertDialog();
+                       studytime.backTime(Integer.parseInt(time));
+                     }
+                   else {
                         if(a==1) {
                             sum = sum + Integer.parseInt(edt_inputTime.getText().toString());
                             total = total + Integer.parseInt(edt_inputTime.getText().toString());
 
-                            txt_total.setText("&quot;총"+total+"시간&quot;");
+                            txt_total.setText("\" 총 "+total+"시간 \"");
 
                             if (sum >= 12) {
                                 level += (sum / 12);
@@ -151,19 +150,24 @@ public class MainActivity extends AppCompatActivity {
                             sum = sum - Integer.parseInt(edt_inputTime.getText().toString());
                             total = total - Integer.parseInt(edt_inputTime.getText().toString());
 
-                            txt_total.setText("&quot;총"+total+"시간&quot;");
-
+                            txt_total.setText("\" 총 "+total+"시간 \"");
+                            txt_total.setText("\" 총 "+total+"시간 \"");
                             if (sum <=0 ) {
-                                level += (sum / 12);
-                                sum = -sum;
-                                sum %= 12;
-                                sum = 12-sum;
-                                txt_level.setText("Level " + level);
-                                for (i = 1; i <= 12; i++) {
-                                    timeArr[i - 1].setBackgroundResource(R.drawable.off);
-                                }
-                                for (i = 1; i <= sum; i++) {
-                                    timeArr[i - 1].setBackgroundResource(R.drawable.on);
+
+                                if(total != 0) {
+                                    level += (sum / 12);
+                                    sum = -sum;
+                                    sum %= 12;
+                                    sum = 12 - sum;
+                                    txt_level.setText("Level " + level);
+                                    for (i = 1; i <= 12; i++) {
+                                        timeArr[i - 1].setBackgroundResource(R.drawable.off);
+                                    }
+                                    for (i = 1; i <= sum; i++) {
+                                        timeArr[i - 1].setBackgroundResource(R.drawable.on);
+                                    }
+                                }else{
+                                    Toast.makeText(getApplicationContext(),"삭제할 시간이 없습니다",Toast.LENGTH_SHORT).show();
                                 }
 
                             } else {
@@ -175,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                             txt_current.setText(sum + "/12 시간");
                             setImage();
                         }
-                    }
+                  }
                 }
             }
         });
@@ -189,17 +193,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if(clicked){
                     linear_timetable.setVisibility(View.VISIBLE);
-                    btn_minus.setBackgroundResource(R.drawable.btn_click2);
-                    btn_study.setBackgroundResource(R.drawable.btn_design);
-                    btn_minus.setTextColor(Color.rgb(255, 255, 255));
-                    btn_study.setTextColor(Color.rgb(112, 112, 112));
                     clicked = false;
                 }else{
                     linear_timetable.setVisibility(View.INVISIBLE);
-                    btn_study.setBackgroundResource(R.drawable.btn_design);
-                    btn_minus.setBackgroundResource(R.drawable.btn_design);
-                    btn_study.setTextColor(Color.rgb(112, 112, 112));
-                    btn_minus.setTextColor(Color.rgb(112, 112, 112));
                     clicked = true;
                 }
 
@@ -259,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
         sum = sum + time;
         total = total + time;
 
-        txt_total.setText("&quot;총"+total+"시간&quot;");
+        txt_total.setText("\" 총 "+total+"시간 \"");
 
         if (sum >= 12) {
             level += (sum/12);
@@ -281,7 +277,6 @@ public class MainActivity extends AppCompatActivity {
         txt_current.setText(sum+"/12 시간");
         setImage();
     }
-
 
     private void addData(String userName, int time, int userNumber, String pw) {
         Map<String,Object>taskmap = new HashMap<>();
