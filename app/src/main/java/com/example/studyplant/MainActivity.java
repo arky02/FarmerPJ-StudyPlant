@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                             sum = sum - Integer.parseInt(edt_inputTime.getText().toString());
                             total = total - Integer.parseInt(edt_inputTime.getText().toString());
 
-                            txt_total.setText("&quot;총"+total+"시간&quot;");
+                            txt_total.setText("&quot;총"+total+"시간 /'");
 
                             if (sum <=0 ) {
                                 level += (sum / 12);
@@ -281,7 +281,6 @@ public class MainActivity extends AppCompatActivity {
         txt_current.setText(sum+"/12 시간");
         setImage();
     }
-
 
     private void addData(String userName, int time, int userNumber, String pw) {
         Map<String,Object>taskmap = new HashMap<>();
