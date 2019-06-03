@@ -75,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
         timeArr[11] = findViewById(R.id.time12);
         image = findViewById(R.id.image);
 
-        txt_name.setText("StudyPlant의 부지런한 농부"+Global.student[Global.s8_num-1]);
+        txt_name.setText("StudyPlant의 부지런한 "+ Global.student[Global.s8_num-1]+"농부");
+
 
         linear_timetable.setVisibility(View.INVISIBLE);
         studyTimeData studytime = (studyTimeData)getApplication();
@@ -88,20 +89,10 @@ public class MainActivity extends AppCompatActivity {
                 a=1;//면학시간 추가
 
                 if(clicked){
-
-                    btn_study.setBackgroundResource(R.drawable.btn_design);
-                    btn_minus.setBackgroundResource(R.drawable.btn_design);
-                    btn_study.setTextColor(Color.rgb(112, 112, 112));
-                    btn_minus.setTextColor(Color.rgb(112, 112, 112));
                     linear_timetable.setVisibility(View.VISIBLE);
                     clicked = false;
 
                 }else{
-
-                    btn_study.setBackgroundResource(R.drawable.btn_click1);
-                    btn_minus.setBackgroundResource(R.drawable.btn_design);
-                    btn_study.setTextColor(Color.rgb(255, 255, 255));
-                    btn_minus.setTextColor(Color.rgb(112, 112, 112));
                     linear_timetable.setVisibility(View.INVISIBLE);
                     clicked = true;
                 }
@@ -126,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                             sum = sum + Integer.parseInt(edt_inputTime.getText().toString());
                             total = total + Integer.parseInt(edt_inputTime.getText().toString());
 
-                            txt_total.setText("&quot;총"+total+"시간&quot;");
+                            txt_total.setText("\" 총"+total+"시간 \"");
 
                             if (sum >= 12) {
                                 level += (sum / 12);
@@ -151,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                             sum = sum - Integer.parseInt(edt_inputTime.getText().toString());
                             total = total - Integer.parseInt(edt_inputTime.getText().toString());
 
-                            txt_total.setText("&quot;총"+total+"시간&quot;");
+                            txt_total.setText("\" 총"+total+"시간 \"");
 
                             if (sum <=0 ) {
                                 level += (sum / 12);
@@ -189,17 +180,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if(clicked){
                     linear_timetable.setVisibility(View.VISIBLE);
-                    btn_minus.setBackgroundResource(R.drawable.btn_click2);
-                    btn_study.setBackgroundResource(R.drawable.btn_design);
-                    btn_minus.setTextColor(Color.rgb(255, 255, 255));
-                    btn_study.setTextColor(Color.rgb(112, 112, 112));
                     clicked = false;
                 }else{
                     linear_timetable.setVisibility(View.INVISIBLE);
-                    btn_study.setBackgroundResource(R.drawable.btn_design);
-                    btn_minus.setBackgroundResource(R.drawable.btn_design);
-                    btn_study.setTextColor(Color.rgb(112, 112, 112));
-                    btn_minus.setTextColor(Color.rgb(112, 112, 112));
                     clicked = true;
                 }
 
@@ -259,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
         sum = sum + time;
         total = total + time;
 
-        txt_total.setText("&quot;총"+total+"시간&quot;");
+        txt_total.setText("\" 총"+total+"시간 \"");
 
         if (sum >= 12) {
             level += (sum/12);

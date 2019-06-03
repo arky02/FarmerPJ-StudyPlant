@@ -29,8 +29,7 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(),password.class);
             intent.putExtra("isFirst",false);
             startActivity(intent);
-
-
+            finish();
         }
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(),password.class);
                     intent.putExtra("isFirst",true);
                     startActivity(intent);
-
+                    finish();
                 }
             }
         });

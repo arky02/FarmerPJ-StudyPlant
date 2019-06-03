@@ -9,7 +9,7 @@
     android:background="#FFFFFF">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="4"
         android:orientation="horizontal">
@@ -21,17 +21,19 @@
             android:layout_marginLeft="40dp"
             android:layout_marginTop="30dp"
             android:text="농부 이름"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:layout_weight="8"/>
 
         <TextView
             android:id="@+id/txt_level"
             android:layout_width="133dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="250dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="35dp"
             android:text="LEVEL1"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:gravity="right"
+            android:layout_weight="2"/>
     </LinearLayout>
 
 
@@ -65,6 +67,18 @@
                 android:paddingLeft="13dp"
                 android:background="@drawable/btn_design"
                 android:textColor="#707070"/>
+
+            <TextView
+                android:id="@+id/txt_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="60dp"
+                android:layout_marginBottom="20dp"
+                android:text="&quot;총 0시간&quot;"
+                android:textColor="#66A068"
+                android:textSize="40dp"
+                android:textStyle="italic" />
 
 
 
@@ -113,18 +127,6 @@
                 android:textColor="#454745"/>
 
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/txt_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="60dp"
-            android:text="&quot;총 0시간&quot;"
-            android:textColor="#66A068"
-            android:textSize="40dp"
-            android:textStyle="italic"
-            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
     <ImageView
