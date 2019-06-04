@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"
-            android:text="&quot;총 0시간&quot;"
+            android:text="총 0시간"
             android:textColor="#66A068"
             android:textSize="40dp"
             android:textStyle="italic" />

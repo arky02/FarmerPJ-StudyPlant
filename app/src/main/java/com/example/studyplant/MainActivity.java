@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         linear_timetable.setVisibility(View.INVISIBLE);
         studyTimeData studytime = (studyTimeData)getApplication();
+        studytime.resetTime();
         studytime.setTime(time_current);
         reSetting(time);
 
@@ -99,89 +101,6 @@ public class MainActivity extends AppCompatActivity {
                 btn_input.setText("추가");
 
             }
-
-        });
-        btn_input.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String time = edt_inputTime.getText().toString();
-                int time_num = Integer.parseInt(edt_inputTime.getText().toString());
-                studyTimeData studytime = (studyTimeData)getApplication();
-
-                if(a==1){
-                    studytime.setTime(Integer.parseInt(time));
-                }else if(a==2){
-                    studytime.backTime(Integer.parseInt(time));
-                    reSetting(sum);
-                }
-
-                if(!time.isEmpty()){
-                    if(time_num > 8 || studytime.getTime() > 8) {
-                       showAlertDialog();
-                       studytime.backTime(Integer.parseInt(time));
-                     }
-                   else {
-                        if(a==1) {
-                            sum = sum + Integer.parseInt(edt_inputTime.getText().toString());
-                            total = total + Integer.parseInt(edt_inputTime.getText().toString());
-
-                            txt_total.setText("\" 총 "+total+"시간 \"");
-
-                            if (sum >= 12) {
-                                level += (sum / 12);
-                                sum %= 12;
-                                txt_level.setText("Level " + level);
-                                for (i = 1; i <= 12; i++) {
-                                    timeArr[i - 1].setBackgroundResource(R.drawable.off);
-                                }
-                                for (i = 1; i <= sum; i++) {
-                                    timeArr[i - 1].setBackgroundResource(R.drawable.on);
-                                }
-
-                            } else {
-                                for (i = 1; i <= sum; i++) {
-                                    timeArr[i - 1].setBackgroundResource(R.drawable.on);
-                                }
-                            }
-                            edt_inputTime.setText("");
-                            txt_current.setText(sum + "/12 시간");
-                            setImage();
-                        }else if(a==2){
-                            sum = sum - Integer.parseInt(edt_inputTime.getText().toString());
-                            total = total - Integer.parseInt(edt_inputTime.getText().toString());
-
-                            txt_total.setText("\" 총 "+total+"시간 \"");
-                            txt_total.setText("\" 총 "+total+"시간 \"");
-                            if (sum <=0 ) {
-
-                                if(total != 0) {
-                                    level += (sum / 12);
-                                    sum = -sum;
-                                    sum %= 12;
-                                    sum = 12 - sum;
-                                    txt_level.setText("Level " + level);
-                                    for (i = 1; i <= 12; i++) {
-                                        timeArr[i - 1].setBackgroundResource(R.drawable.off);
-                                    }
-                                    for (i = 1; i <= sum; i++) {
-                                        timeArr[i - 1].setBackgroundResource(R.drawable.on);
-                                    }
-                                }else{
-                                    Toast.makeText(getApplicationContext(),"삭제할 시간이 없습니다",Toast.LENGTH_SHORT).show();
-                                }
-
-                            } else {
-                                for (i = 1; i <=  sum; i++) {
-                                    timeArr[i - 1].setBackgroundResource(R.drawable.on);
-                                }
-                            }
-                            edt_inputTime.setText("");
-                            txt_current.setText(sum + "/12 시간");
-                            setImage();
-                        }
-                  }
-                }
-            }
         });
 
         btn_minus.setOnClickListener(new View.OnClickListener() {
@@ -198,8 +117,102 @@ public class MainActivity extends AppCompatActivity {
                     linear_timetable.setVisibility(View.INVISIBLE);
                     clicked = true;
                 }
+            }
+        });
 
+        btn_input.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String time = edt_inputTime.getText().toString(); //넣은 시간 가져오기
 
+                studyTimeData studytime = (studyTimeData)getApplication(); //하루에 한 시간
+
+                if(!time.isEmpty()){ //시간이 NULL이 아닐시에만 실행
+                    if(a == 1) { // 추가하는 버튼일 때
+                        studytime.setTime(Integer.parseInt(time));
+                        if(Integer.parseInt(time) > 8 || studytime.getTime() > 8) { // 하루에한 시간이나 한번에 하는 시간이 8시간이 넘으면 산꼴
+                            studytime.backTime(Integer.parseInt(time));
+                            showAlertDialog();
+
+                        }
+                        else {
+                            sum = sum + Integer.parseInt(edt_inputTime.getText().toString()); //sum : 경험치바
+                            total = total + Integer.parseInt(edt_inputTime.getText().toString()); //total : 총시간
+
+                            txt_total.setText("총 "+total+"시간");
+
+                            if (sum >= 12) { //경험치 12시간 넘으면
+                                level += (sum / 12); //레벨 증가
+                                sum %= 12;
+                                txt_level.setText("Level " + level);
+                                for (i = 1; i <= 12; i++) {
+                                    timeArr[i - 1].setBackgroundResource(R.drawable.off);
+                                }
+                                for (i = 1; i <= sum; i++) {
+                                    timeArr[i - 1].setBackgroundResource(R.drawable.on);
+                                }
+                            }
+                            else {
+                                for (i = 1; i <= sum; i++) {
+                                    timeArr[i - 1].setBackgroundResource(R.drawable.on);
+                                }
+                            }
+                            edt_inputTime.setText(""); //시간넣는 곳 초기화
+                            txt_current.setText(sum + "/12 시간");
+                            setImage();
+                        }
+                    }
+                    else if(a == 2){
+                        studytime.backTime(Integer.parseInt(time)); //하루에 한 시간 줄이기
+
+                        sum = sum - Integer.parseInt(time);//경험치
+                        total = total - Integer.parseInt(time); //총시간
+
+                        if (sum <=0 ) { //경험치 0보다 작아짐 -> 레벨 1감소
+                            if(total >= 0) {
+                                level = setLevel(total) ; //레벨 1감소
+                                sum = -sum;
+                                sum %= 12;
+                                sum = 12 - sum;
+                                txt_level.setText("Level " + level);
+                                for (i = 1; i <= 12; i++) {
+                                    timeArr[i - 1].setBackgroundResource(R.drawable.off);
+                                }
+                                for (i = 1; i <= sum; i++) {
+                                    timeArr[i - 1].setBackgroundResource(R.drawable.on);
+                                }
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),"삭제할 시간을 다시 설정해주세요",Toast.LENGTH_SHORT).show();
+                                studytime.setTime(Integer.parseInt(time)); //하루에 한 시간 줄이기
+
+                                sum = sum + Integer.parseInt(time);//경험치
+                                total = total + Integer.parseInt(time); //총시간
+                            }
+                       }
+                        else { //경험치 0보다 작아지지 않을 경우
+                            if(total >= 0)  { //총시간이 0보다 크면
+                                for (i = 1; i <= 12; i++) {
+                                    timeArr[i - 1].setBackgroundResource(R.drawable.off);
+                                }
+                                for (i = 1; i <=  sum; i++) {
+                                    timeArr[i - 1].setBackgroundResource(R.drawable.on);
+                                }
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(),"삭제할 시간을 다시 설정해주세요",Toast.LENGTH_SHORT).show();
+                                studytime.setTime(Integer.parseInt(time)); //하루에 한 시간 줄이기
+
+                                sum = sum + Integer.parseInt(time);//경험치
+                                total = total + Integer.parseInt(time); //총시간
+                            }
+                        }
+                        txt_total.setText("총 "+total+"시간 "); //됨
+                        edt_inputTime.setText("");
+                        txt_current.setText(sum + "/12 시간");
+                        setImage();
+                    }
+                }
             }
         });
     }
@@ -219,8 +232,12 @@ public class MainActivity extends AppCompatActivity {
 
         String pw = sp_password.getString("password","");
 
-        addData(Global.student[Global.s8_num-1], total, Global.s8_num, pw); //비밀번호 추가
+        addData(Global.student[Global.s8_num-1], total, Global.s8_num, pw);
 
+    }
+
+    private int setLevel(int time) {
+        return time / 12 + 1;
     }
 
     private void setImage() {
@@ -255,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
         sum = sum + time;
         total = total + time;
 
-        txt_total.setText("\" 총 "+total+"시간 \"");
+        txt_total.setText("총 "+total+"시간 ");
 
         if (sum >= 12) {
             level += (sum/12);

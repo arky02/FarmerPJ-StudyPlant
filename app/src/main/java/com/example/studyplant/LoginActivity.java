@@ -80,10 +80,8 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
                 if(edt_quiz.getText().toString().equals("불파만지파참")|| edt_quiz.getText().toString().equals("불파만지파참 ")){
-                    Toast.makeText(getApplicationContext(), "불파만지파참ㄷ", Toast.LENGTH_SHORT).show();
                     if(isChecked) {
                         Global.s8_num = Integer.parseInt(edt_num.getText().toString());
-                        Toast.makeText(getApplicationContext(), "체크드", Toast.LENGTH_SHORT).show();
                         edit = shared.edit();
                         edit.putInt("num", Global.s8_num);
                         edit.commit();
