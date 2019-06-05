@@ -12,7 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class password extends AppCompatActivity {
+public class
+password extends AppCompatActivity {
 
     //Button[] btn = new Button[9];
     Button btn_clear,btn_erase,btn_login;
@@ -86,23 +87,7 @@ public class password extends AppCompatActivity {
         txt_forget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder dialog1 = new AlertDialog.Builder(getApplicationContext());
-                dialog1.setTitle("아이고...설마, 비밀번호를 잊어버렸나요")
-                        .setMessage("개발진한테 문의(페메)하세요! 비밀번호를 알려드립니다 ^_^")
-                        .setPositiveButton("네", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(), "초기화 되었습니다", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getApplicationContext(), "취소했습니다.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                dialog = dialog1.create();
-                dialog1.show();
+                Alarm();
             }
 
         });
@@ -130,6 +115,24 @@ public class password extends AppCompatActivity {
             case R.id.btn_8 : edt_result.setText(edt_result.getText().toString() + 8); break;
             case R.id.btn_9 : edt_result.setText(edt_result.getText().toString() + 9); break;
         }
+    }
+
+    public void Alarm(){
+        AlertDialog.Builder dialog1 = new AlertDialog.Builder(password.this);
+        dialog1.setTitle("아이고...설마 비밀번호를 잊어버렸나요?")
+                .setMessage("개발진한테 문의(페메)하세요! \n비밀번호를 알려드립니다 ^_^")
+                .setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "초기화 되었습니다", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "취소했습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }).create().show();
     }
     }
 

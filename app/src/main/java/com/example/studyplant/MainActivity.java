@@ -207,9 +207,17 @@ public class MainActivity extends AppCompatActivity {
                                 total = total + Integer.parseInt(time); //총시간
                             }
                         }
-                        txt_total.setText("총 "+total+"시간 "); //됨
+                        if(total == 0){
+                            txt_current.setText("0/12 시간");
+
+                            for (i = 1; i <= 12; i++) {
+                                timeArr[i - 1].setBackgroundResource(R.drawable.off);}
+
+                        }else {
+                            txt_current.setText(sum + "/12 시간");
+                        }
+                        txt_total.setText("총 " + total + "시간 ");
                         edt_inputTime.setText("");
-                        txt_current.setText(sum + "/12 시간");
                         setImage();
                     }
                 }
