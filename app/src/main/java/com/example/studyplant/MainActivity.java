@@ -55,11 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
         date_current = getDate(); //날짜 불러옴
 
-        date_check = sf.getInt("date",getDate());
+        date_check = sf.getInt("date",0);
         int time = sf.getInt("time", 0);
         int time_current = sf.getInt("time_current",0);
-
-        setting_StudyTimeData(date_current, date_check); //하루 공부시간 초기화
 
         btn_study = findViewById(R.id.btn_study);
         txt_name =findViewById(R.id.farmer_name);
@@ -91,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         studyTimeData studytime = (studyTimeData)getApplication();
         studytime.resetTime();
         studytime.setTime(time_current);
+        setting_StudyTimeData(date_current, date_check); //하루 공부시간 초기화
         reSetting(time);
 
         btn_study.setOnClickListener(new View.OnClickListener() {
