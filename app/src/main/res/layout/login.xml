@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="#FFFFFF">
 
 
     <TextView
@@ -21,7 +22,8 @@
         android:layout_height="wrap_content"
         android:text="Certificate that you are S8!"
         android:textSize="30sp"
-        android:layout_margin="40dp"/>
+        android:layout_margin="40dp"
+        android:textColor="@color/colorPrimaryDark"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -32,7 +34,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="S8 나이스 번호"
-            android:textSize="25sp"/>
+            android:textSize="25sp"
+            android:layout_marginRight="15dp"
+            android:textColor="@android:color/secondary_text_light"/>
 
         <EditText
             android:id="@+id/Edt_num"
@@ -52,7 +56,8 @@
             android:layout_height="wrap_content"
             android:text="S8반의 교훈은?"
             android:textSize="25sp"
-            android:layout_margin="8dp"/>
+            android:layout_marginRight="15dp"
+            android:textColor="@android:color/secondary_text_light"/>
 
         <EditText
             android:id="@+id/Edt_quiz"
@@ -76,7 +81,8 @@
             android:text="@string/plantbtn"
             android:textSize="25dp"
             android:background="@drawable/btn_design"
-            android:padding="15dp"/>
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"/>
 
 
     </LinearLayout>
