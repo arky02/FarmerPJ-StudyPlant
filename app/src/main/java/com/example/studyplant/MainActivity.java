@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView image;
     boolean clicked = true;
     SharedPreferences shared,sf,sp_password;
+    int date_current; //날짜 불러올거임
+    int date_check; //어제 날짜 확인
 
     EditText edt_inputTime;
     ImageView[] timeArr = new ImageView[12];
@@ -50,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
         sp_password = getApplicationContext().getSharedPreferences("password", MODE_PRIVATE); //비밀번호 가져오기
         sf = getSharedPreferences("sFile", MODE_PRIVATE);//시간 가져오기
 
+        date_current = getDate(); //날짜 불러옴
+
+        date_check = sf.getInt("date",0);
         int time = sf.getInt("time", 0);
         int time_current = sf.getInt("time_current",0);
 
@@ -83,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         studyTimeData studytime = (studyTimeData)getApplication();
         studytime.resetTime();
         studytime.setTime(time_current);
+        setting_StudyTimeData(date_current, date_check); //하루 공부시간 초기화
         reSetting(time);
 
         btn_study.setOnClickListener(new View.OnClickListener() {
@@ -234,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("sFile",MODE_PRIVATE);
         sp_password = getApplicationContext().getSharedPreferences("password", MODE_PRIVATE); //비밀번호 가져오기
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("date", date_current);
         editor.putInt("time", total);
         editor.putInt("time_current", time);
         editor.commit();
@@ -241,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
         String pw = sp_password.getString("password","");
 
         addData(Global.student[Global.s8_num-1], total, Global.s8_num, pw);
+
 
     }
 
@@ -311,5 +320,22 @@ public class MainActivity extends AppCompatActivity {
 
         databaseReference.updateChildren(taskmap);
 
+    }
+
+    private int getDate() {
+        Calendar calendar = Calendar.getInstance();
+        int date = 0;
+
+        date = calendar.get(Calendar.DATE);
+        return date;
+    }
+
+    private void setting_StudyTimeData(int date_current, int date_check) {
+
+        studyTimeData studytime = (studyTimeData)getApplication();
+
+        if(date_check != date_current) {
+            studytime.resetTime();
+        }
     }
 }
