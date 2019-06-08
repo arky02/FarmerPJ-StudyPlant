@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                                 sum %= 12;
                                 txt_level.setText("Level " + level);
                                 for (i = 1; i <= 12; i++) {
-                                    timeArr[i - 1].setBackgroundResource(R.drawable.off);
+                                    timeArr[i - 1].setBackgroundResource(R.drawable.off_l);
                                 }
                                 for (i = 1; i <= sum; i++) {
                                     timeArr[i - 1].setBackgroundResource(R.drawable.on);
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                                 sum = 12 - sum;
                                 txt_level.setText("Level " + level);
                                 for (i = 1; i <= 12; i++) {
-                                    timeArr[i - 1].setBackgroundResource(R.drawable.off);
+                                    timeArr[i - 1].setBackgroundResource(R.drawable.off_l);
                                 }
                                 for (i = 1; i <= sum; i++) {
                                     timeArr[i - 1].setBackgroundResource(R.drawable.on);
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                         else { //경험치 0보다 작아지지 않을 경우
                             if(total >= 0)  { //총시간이 0보다 크면
                                 for (i = 1; i <= 12; i++) {
-                                    timeArr[i - 1].setBackgroundResource(R.drawable.off);
+                                    timeArr[i - 1].setBackgroundResource(R.drawable.off_l);
                                 }
                                 for (i = 1; i <=  sum; i++) {
                                     timeArr[i - 1].setBackgroundResource(R.drawable.on);
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                             txt_current.setText("0/12 시간");
 
                             for (i = 1; i <= 12; i++) {
-                                timeArr[i - 1].setBackgroundResource(R.drawable.off);}
+                                timeArr[i - 1].setBackgroundResource(R.drawable.off_l);}
 
                         }else {
                             txt_current.setText(sum + "/12 시간");
@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
             sum %= 12;
             txt_level.setText("Level "+level);
             for (i = 1; i <= 12; i++) {
-                timeArr[i - 1].setBackgroundResource(R.drawable.off);
+                timeArr[i - 1].setBackgroundResource(R.drawable.off_l);
             }
             for (i = 1; i <= sum; i++) {
                 timeArr[i - 1].setBackgroundResource(R.drawable.on);
