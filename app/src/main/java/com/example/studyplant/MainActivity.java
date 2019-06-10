@@ -194,6 +194,9 @@ public class MainActivity extends AppCompatActivity {
                                 studytime.setTime(Integer.parseInt(time)); //하루에 한 시간 줄이기
 
                                 sum = sum + Integer.parseInt(time);//경험치
+
+
+
                                 total = total + Integer.parseInt(time); //총시간
                             }
                        }
