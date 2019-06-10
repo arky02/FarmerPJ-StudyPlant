@@ -69,27 +69,32 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                for (int i = 0; i < userNum.size(); i++) {
-                    if((edt_num.getText().toString().equals(userNum.get(i)))) {
-                        Toast.makeText(getApplicationContext(), "이미 등록된 농부입니다", Toast.LENGTH_SHORT).show();
-                        isChecked = false;
-                        break;
+                if(1<=Integer.parseInt(edt_num.getText().toString()) && Integer.parseInt(edt_num.getText().toString())<=33) {
+
+                    for (int i = 0; i < userNum.size(); i++) {
+                        if ((edt_num.getText().toString().equals(userNum.get(i)))) {
+                            Toast.makeText(getApplicationContext(), "이미 등록된 농부입니다", Toast.LENGTH_SHORT).show();
+                            isChecked = false;
+                            break;
+                        } else {
+                            isChecked = true;
+                        }
                     }
-                    else {
-                        isChecked = true;
+                    if (edt_quiz.getText().toString().equals("불파만지파참") || edt_quiz.getText().toString().equals("불파만지파참 ")) {
+                        if (isChecked) {
+                            Global.s8_num = Integer.parseInt(edt_num.getText().toString());
+                            edit = shared.edit();
+                            edit.putInt("num", Global.s8_num);
+                            edit.commit();
+                            Intent intent = new Intent(getApplicationContext(), password.class);
+                            intent.putExtra("isFirst", true);
+                            startActivity(intent);
+                            finish();
+                        }
+
                     }
-                }
-                if(edt_quiz.getText().toString().equals("불파만지파참")|| edt_quiz.getText().toString().equals("불파만지파참 ")){
-                    if(isChecked) {
-                        Global.s8_num = Integer.parseInt(edt_num.getText().toString());
-                        edit = shared.edit();
-                        edit.putInt("num", Global.s8_num);
-                        edit.commit();
-                        Intent intent = new Intent(getApplicationContext(), password.class);
-                        intent.putExtra("isFirst", true);
-                        startActivity(intent);
-                        finish();
-                    }
+                }else{
+                    Toast.makeText(getApplicationContext(),"나이스 번호 입력 칸에 학번 말고 1~33까지의 번호를 입력해주세요 ",Toast.LENGTH_SHORT).show();
 
                 }
             }
